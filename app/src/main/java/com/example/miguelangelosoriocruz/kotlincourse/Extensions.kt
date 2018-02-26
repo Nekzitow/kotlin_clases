@@ -2,7 +2,6 @@ package com.example.miguelangelosoriocruz.kotlincourse
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,4 +23,12 @@ fun ViewGroup.inflate(idRes: Int) : View {
 
 fun ImageView.loadURL(url: String) {
     Picasso.with(context).load(url).into(this)
+}
+
+inline  fun <reified T : View > View.find(res: Int) : T {
+    return findViewById<T>(res)
+}
+
+inline fun <reified  T : View> RecyclerView.ViewHolder.find(res: Int) : T {
+    return itemView.find(res)
 }

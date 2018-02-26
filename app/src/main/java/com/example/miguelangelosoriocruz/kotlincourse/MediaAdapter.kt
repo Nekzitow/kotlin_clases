@@ -21,8 +21,11 @@ class MediaAdapter( var items: List<MediaItem>) : RecyclerView.Adapter<MediaAdap
 
     class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
 
-        var imageView = itemView!!.findViewById<ImageView>(R.id.image_view)
-        var textView = itemView!!.findViewById<TextView>(R.id.txtv)
+        //var imageView = itemView!!.findViewById<ImageView>(R.id.image_view)
+        //var textView = itemView!!.findViewById<TextView>(R.id.txtv)
+        var imageView = itemView!!.find<ImageView>(R.id.image_view)
+        var textView = itemView!!.find<TextView>(R.id.txtv)
+
         fun bindData(item: MediaItem) {
             imageView.loadURL(item.urlImage)
             textView.text = item.title

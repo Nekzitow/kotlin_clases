@@ -1,3 +1,5 @@
 package com.example.miguelangelosoriocruz.kotlincourse
 
-public class MediaItem(var title: String, var urlImage: String)
+data class MediaItem(val title: String, val urlImage: String, val type: Type) {
+    enum class Type {PHOTO, VIDEO}
+}
