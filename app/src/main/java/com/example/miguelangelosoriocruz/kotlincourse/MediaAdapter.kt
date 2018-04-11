@@ -1,5 +1,6 @@
 package com.example.miguelangelosoriocruz.kotlincourse
 
+import android.opengl.Visibility
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
@@ -24,10 +25,23 @@ class MediaAdapter( var items: List<MediaItem>) : RecyclerView.Adapter<MediaAdap
         //var imageView = itemView!!.findViewById<ImageView>(R.id.image_view)
         //var textView = itemView!!.findViewById<TextView>(R.id.txtv)
         var imageView = itemView!!.find<ImageView>(R.id.image_view)
+        var videoView = itemView!!.find<ImageView>(R.id.media_video_indicator)
         var textView = itemView!!.find<TextView>(R.id.txtv)
 
         fun bindData(item: MediaItem) {
-            imageView.loadURL(item.urlImage)
+
+            when(item.type) {
+                MediaItem.Type.VIDEO -> {
+                    imageView.visibility = View.GONE
+                    videoView.visibility = View.VISIBLE
+                }
+                MediaItem.Type.PHOTO -> {
+                    videoView.visibility = View.GONE
+                    imageView.visibility = View.VISIBLE
+                    imageView.loadURL(item.urlImage)
+                }
+            }
+
             textView.text = item.title
         }
     }
