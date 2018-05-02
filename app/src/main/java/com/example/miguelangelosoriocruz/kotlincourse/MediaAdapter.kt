@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import kotlinx.android.synthetic.main.layout_item.*;
+import kotlinx.android.synthetic.main.layout_item.view.*
 
 class MediaAdapter( var items: List<MediaItem>) : RecyclerView.Adapter<MediaAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
@@ -24,25 +26,41 @@ class MediaAdapter( var items: List<MediaItem>) : RecyclerView.Adapter<MediaAdap
 
         //var imageView = itemView!!.findViewById<ImageView>(R.id.image_view)
         //var textView = itemView!!.findViewById<TextView>(R.id.txtv)
-        var imageView = itemView!!.find<ImageView>(R.id.image_view)
+        /*var imageView = itemView!!.find<ImageView>(R.id.image_view)
         var videoView = itemView!!.find<ImageView>(R.id.media_video_indicator)
-        var textView = itemView!!.find<TextView>(R.id.txtv)
+        var textView = itemView!!.find<TextView>(R.id.txtv)*/
 
-        fun bindData(item: MediaItem) {
+        /*fun bindData(item: MediaItem) {
 
             when(item.type) {
                 MediaItem.Type.VIDEO -> {
-                    imageView.visibility = View.GONE
-                    videoView.visibility = View.VISIBLE
+                    itemView.image_view.visibility = View.GONE
+                    itemView.media_video_indicator.visibility = View.VISIBLE
                 }
                 MediaItem.Type.PHOTO -> {
-                    videoView.visibility = View.GONE
-                    imageView.visibility = View.VISIBLE
-                    imageView.loadURL(item.urlImage)
+                    itemView.media_video_indicator.visibility = View.GONE
+                    itemView.image_view.visibility = View.VISIBLE
+                    itemView.image_view.loadURL(item.urlImage)
                 }
             }
 
-            textView.text = item.title
+            itemView.txtv.text = item.title
+        }*/
+        fun bindData(item: MediaItem) = with(itemView) {
+            when(item.type) {
+                MediaItem.Type.VIDEO -> {
+                    image_view.visibility = View.GONE
+                    media_video_indicator.visibility = View.VISIBLE
+                }
+
+                MediaItem.Type.PHOTO -> {
+                    media_video_indicator.visibility = View.GONE
+                    image_view.visibility = View.VISIBLE
+                    image_view.loadURL(item.urlImage)
+                }
+            }
+
+            txtv.text = item.title
         }
     }
 }
